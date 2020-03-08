@@ -12,14 +12,20 @@ var con = mysql.createConnection({
   password: "c6e5c9ce",
   database: "heroku_44d6ee1f0746480"
 });
-
-con.connect(function(err) {
+function doSome(res){
+  con.connect(function(err) {
   if (err) throw err;
+	let responseHeader;
   con.query("SELECT * FROM Persons", function (err, result, fields) {
     if (err) throw err;
-    console.log(Object.keys(result[0]));
+    let keys=(Object.keys(result[0]));
+	 keys.forEach(header=>{
+	responseHeader=responseHeader+''+header;
+	 });
+	res.send(responseHeader);
   });
 });
+}
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -46,7 +52,8 @@ app.get('/', function (req, res) {
      //var gfg = encrypt('bharath');
 //console.log(gfg);
 //console.log(decrypt(gfg));
-res.send('we are at the root route of our server'); 
+doSome(res);
+//res.send('we are at the root route of our server'); 
 }) ;
 app.get('/trying', function (req, res) { 
     transporter.sendMail(mailOptions, function(error, info){
