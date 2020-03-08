@@ -51,7 +51,7 @@ app.listen(port, function (err) {
 	} 
 }) 
 
-app.get('*', function (req, res) { 
+app.get('/', function (req, res) { 
      //var gfg = encrypt('bharath');
 //console.log(gfg);
 //console.log(decrypt(gfg));
