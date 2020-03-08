@@ -4,7 +4,7 @@ var nodemailer = require('nodemailer');
 const app = express(); 
 var mysql = require('mysql');
 const port = process.env.YOUR_PORT || process.env.PORT || 5000;
-var mysql = require('mysql');
+//var mysql = require('mysql');
 
 var con = mysql.createConnection({
   host: "us-cdbr-iron-east-05.cleardb.net",
