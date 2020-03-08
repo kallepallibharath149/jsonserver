@@ -13,8 +13,9 @@ var con = mysql.createConnection({
   database: "heroku_44d6ee1f0746480"
 });
 con.connect(function(err) {
-  if (err) throw err;
+  if (err){};
 });
+con.on('error', function() {});
 function doSome(res){
     let headers='';
     con.query("SELECT * FROM Persons", function (err, result, fields) {
@@ -25,7 +26,7 @@ function doSome(res){
       })
 	    headers=headers+" "+"this was developped by bharath"
       res.send(headers);
-	    con.end();
+      //con.destroy();
     });
  }
 
