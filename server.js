@@ -13,7 +13,7 @@ var con = mysql.createConnection({
   database: "heroku_44d6ee1f0746480"
 });
 con.connect(function(err) {
-  if (err) throw err;
+  //if (err) throw err;
 });
 function doSome(res){
     let headers='';
