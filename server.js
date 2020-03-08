@@ -3,7 +3,7 @@ const express = require('express');
 var nodemailer = require('nodemailer');
 const app = express(); 
 var mysql = require('mysql');
-const port = 8000; 
+const port = process.env.YOUR_PORT || process.env.PORT || 5000;
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
