@@ -12,9 +12,10 @@ var con = mysql.createConnection({
   password: "c6e5c9ce",
   database: "heroku_44d6ee1f0746480"
 });
+con.connect(function(err) {
+  if (err) throw err;
+});
 function doSome(res){
-  con.connect(function(err) {
-    if (err) throw err;
     let headers='';
     con.query("SELECT * FROM Persons", function (err, result, fields) {
       if (err) throw err;
@@ -24,8 +25,7 @@ function doSome(res){
       })
       res.send(headers);
     });
-  });
-}
+ }
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -42,7 +42,8 @@ var transporter = nodemailer.createTransport({
   };
 app.listen(port, function (err) { 
 	if(err){ 
-		console.log("error while starting server"); 
+    console.log("error while starting server"); 
+    if (err) throw err;
 	} 
 	else{ 
 		console.log("server has been started at "+port); 
@@ -59,7 +60,7 @@ doSome(res);
 app.get('/trying', function (req, res) { 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-          console.log(error);
+          if (err) throw err;
         } else {
           console.log('Email sent: ' + info.response);
         }
