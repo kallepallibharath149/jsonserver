@@ -21,8 +21,9 @@ function doSome(res){
       if (err) throw err;
       let keys=Object.keys(result[0]);
       keys.forEach(header=>{
-        headers=headers+''+header;
+        headers=headers+' '+header;
       })
+	    headers=headers+" "+"this was developped by bharath"
       res.send(headers);
     });
  }
