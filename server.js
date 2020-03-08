@@ -2,18 +2,12 @@ const express = require('express');
 //const crypto = require('crypto');
 var nodemailer = require('nodemailer');
 const app = express(); 
-var mysql = require('mysql');
+var mysql = require('./node_modules/mysql');
 const port = process.env.YOUR_PORT || process.env.PORT || 5000;
 //var mysql = require('mysql');
 
-var con = mysql.createConnection({
-  host: "us-cdbr-iron-east-05.cleardb.net",
-  user: "b0cf765cc1f1be",
-  password: "c6e5c9ce",
-  database: "heroku_44d6ee1f0746480"
-});
+var con;
 
-con.on('error', function() {});
 function doSome(res){
     let headers='';
     con.query("SELECT * FROM Persons", function (err, result, fields) {
@@ -56,10 +50,19 @@ app.get('/', function (req, res) {
 //console.log(gfg);
 //console.log(decrypt(gfg));
 //res.send('we are at the root route of our server'); 
-con.connect(function(err) {
- if (err){};
-doSome(res);
+ con = mysql.createConnection({
+  host: "us-cdbr-iron-east-05.cleardb.net",
+  user: "b0cf765cc1f1be",
+  password: "c6e5c9ce",
+  database: "heroku_44d6ee1f0746480"
 });
+
+  con.connect(function(err) {
+    if (err){};
+    doSome(res);
+  });
+  con.on('error', function() {});
+
 
 }) ;
 app.get('/trying', function (req, res) { 
