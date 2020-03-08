@@ -12,9 +12,7 @@ var con = mysql.createConnection({
   password: "c6e5c9ce",
   database: "heroku_44d6ee1f0746480"
 });
-con.connect(function(err) {
-  if (err){};
-});
+
 con.on('error', function() {});
 function doSome(res){
     let headers='';
@@ -58,7 +56,11 @@ app.get('/', function (req, res) {
 //console.log(gfg);
 //console.log(decrypt(gfg));
 //res.send('we are at the root route of our server'); 
+con.connect(function(err) {
+ if (err){};
 doSome(res);
+});
+
 }) ;
 app.get('/trying', function (req, res) { 
     transporter.sendMail(mailOptions, function(error, info){
