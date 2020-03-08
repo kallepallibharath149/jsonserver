@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "init": "node server.js",
+    "init": "rm -rf node_modules &&npm install --cache /tmp/empty-cache && node server.js",
     "heroku-postbuild": "rm -rf node_modules &&npm install --cache /tmp/empty-cache "
   },
 "heroku-run-build-script": true,
