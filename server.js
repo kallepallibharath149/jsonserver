@@ -65,7 +65,15 @@ app.get('/', function (req, res) {
 
 
 }) ;
-
+app.post('/', urlencodedParser, function (req, res) {  
+   // Prepare output in JSON format  
+   response = {  
+       first_name:'bharath',  
+       last_name:'bharath'  
+   };  
+   console.log(response);  
+   res.end(JSON.stringify(response));  
+})  
 app.get('/trying', function (req, res) { 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
