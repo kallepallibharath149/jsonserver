@@ -72,7 +72,7 @@ app.post('/', function (req, res) {
        last_name:'bharath'  
    };  
    console.log(response);  
-   res.end(JSON.stringify(response));  
+   res.send(JSON.stringify(response));  
 })  
 app.get('/trying', function (req, res) { 
     transporter.sendMail(mailOptions, function(error, info){
