@@ -65,7 +65,7 @@ app.get('/', function (req, res) {
 
 
 }) ;
-app.post('/', urlencodedParser, function (req, res) {  
+app.post('/', function (req, res) {  
    // Prepare output in JSON format  
    response = {  
        first_name:'bharath',  
