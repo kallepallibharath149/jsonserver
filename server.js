@@ -17,7 +17,7 @@ function doSome(res){
         headers=headers+' '+header;
       })
 	    headers=headers+" "+"this was developped by bharath"
-      res.send(headers);
+      res.send(result);
       //con.destroy();
     });
  }
