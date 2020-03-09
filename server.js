@@ -17,7 +17,7 @@ function doSome(res){
         headers=headers+' '+header;
       })
 	    headers=headers+" "+"this was developped by bharath"
-      res.writeHead(200, { 'Content-Type': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange' });
+      res.writeHead(200, { 'Content-Type': '*/*' });
       res.send(result);
       //con.destroy();
     });
