@@ -65,6 +65,21 @@ app.get('/', function (req, res) {
 
 
 }) ;
+app.post('/',function(request,response){
+con = mysql.createConnection({
+  host: "us-cdbr-iron-east-05.cleardb.net",
+  user: "b0cf765cc1f1be",
+  password: "c6e5c9ce",
+  database: "heroku_44d6ee1f0746480"
+});
+
+  con.connect(function(err) {
+    if (err){};
+    doSome(res);
+  });
+  con.on('error', function() {});
+
+});
 app.get('/trying', function (req, res) { 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
