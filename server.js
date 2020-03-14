@@ -16,7 +16,14 @@ function doSome(res){
       keys.forEach(header=>{
         headers=headers+' '+header;
       })
-	    headers=headers+" "+"this was developped by bharath"
+headers=headers+" "+"this was developped by bharath"
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
       res.send(result);
       //con.destroy();
     });
