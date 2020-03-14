@@ -17,14 +17,14 @@ var transporter = nodemailer.createTransport({
               secure: false,
 service: 'yahoo',
   auth: {
-    user: 'raju.kallepalli@yahoomail.com',
+    user: 'raju.kallepalli@yahoo.com',
     pass: 'Bharath@123'
   },
 debug: false,
             logger: true
 });
 var mailOptions = {
-  from: 'raju.kallepalli@yahoomail.com',
+  from: 'raju.kallepalli@yahoo.com',
   to: 'raju221156@gmail.com',
   subject: 'Some One trying to login OEC Application',
   html: ''
