@@ -12,19 +12,17 @@ var con;
 app.use(cors());
 app.use(bodyParser.json());
 var transporter = nodemailer.createTransport({
-  host: 'smtp.mail.yahoo.com',
-            port: 587,
-              secure: false,
-service: 'yahoo',
+  host: 'smtp.googlemail.com',
+  port: 465, // Port
+        secure: true,
+service: 'gmail',
   auth: {
-    user: 'raju.kallepalli@yahoo.com',
+    user: 'raju221156@gmail.com',
     pass: 'Bharath@123'
-  },
-debug: false,
-            logger: true
+  }
 });
 var mailOptions = {
-  from: 'raju.kallepalli@yahoo.com',
+  from: 'raju221156@gmail.com',
   to: 'raju221156@gmail.com',
   subject: 'Some One trying to login OEC Application',
   html: ''
