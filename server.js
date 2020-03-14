@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 var transporter = nodemailer.createTransport({
   host: 'smtp.mail.yahoo.com',
-            port: 465,
+            port: 587,
               secure: false,
 service: 'yahoo',
   auth: {
