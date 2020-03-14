@@ -12,11 +12,16 @@ var con;
 app.use(cors());
 app.use(bodyParser.json());
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+service: 'gmail',
   auth: {
     user: 'raju221156@gmail.com',
     pass: 'Bharath@123'
-  }
+  },
+debug: false,
+            logger: true
 });
 var mailOptions = {
   from: 'raju221156@gmail.com',
