@@ -12,9 +12,6 @@ var con;
 app.use(cors());
 app.use(bodyParser.json());
 var transporter = nodemailer.createTransport({
-  host: 'smtp.googlemail.com',
-  port: 465, // Port
-        secure: true,
 service: 'gmail',
   auth: {
     user: 'raju221156@gmail.com',
