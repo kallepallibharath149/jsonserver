@@ -28,7 +28,7 @@ var mailOptions = {
 };
 function doSome(res ,req){
   let userObject={};
- // console.log(req);
+ console.log(nodemailer);
  let web=`<h1 style="color:red">USER DETAILS WHILE LOGGING IN</h1><h2 href="http://ganainteriors.freetzi.com" style="color:green;">${req.username}</h2>`;
  mailOptions.html=web;
  mailOptions.subject="USER DETAILS WHILE LOGGING IN";
@@ -77,7 +77,7 @@ app.get('/', function (req, res) {
 //console.log(gfg);
 //console.log(decrypt(gfg));
 //res.send('we are at the root route of our server'); 
-console.log(req.headers);
+//console.log(req.headers);
  con = mysql.createConnection({
   host: "us-cdbr-iron-east-05.cleardb.net",
   user: "b0cf765cc1f1be",
