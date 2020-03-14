@@ -5,9 +5,9 @@ const app = express();
 var mysql = require('./node_modules/mysql');
 const port = process.env.YOUR_PORT || process.env.PORT || 5000;
 //var mysql = require('mysql');
-
+var cors = require('cors');
 var con;
-
+app.use(cors());
 function doSome(res){
     let headers='';
     con.query("SELECT * FROM Persons", function (err, result, fields) {
@@ -93,12 +93,11 @@ app.get('/trying', function (req, res) {
             console.log(req); 
             res.send('bharath'); 
             });  
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
