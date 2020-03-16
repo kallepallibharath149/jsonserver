@@ -2,7 +2,8 @@ const express = require('express');
 //const crypto = require('crypto');
 var nodemailer = require('nodemailer');
 const app = express(); 
-
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('bharath');
 var bodyParser = require('body-parser');
 var mysql = require('./node_modules/mysql');
 const port = process.env.YOUR_PORT || process.env.PORT || 5000;
@@ -11,6 +12,10 @@ var cors = require('cors');
 var con;
 app.use(cors());
 app.use(bodyParser.json());
+const encryptedString = cryptr.encrypt('bharath');
+const decryptedString = cryptr.decrypt(encryptedString);
+console.log(encryptedString); 
+console.log(decryptedString);
 var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
