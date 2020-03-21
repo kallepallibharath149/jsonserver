@@ -14,8 +14,8 @@ app.use(cors());
 app.use(bodyParser.json());
 const encryptedString = cryptr.encrypt('bharath');
 const decryptedString = cryptr.decrypt(encryptedString);
-console.log(encryptedString); 
-console.log(decryptedString);
+//console.log(encryptedString); 
+//console.log(decryptedString);
 var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -33,7 +33,7 @@ var mailOptions = {
 };
 function doSome(res ,req){
   let userObject={};
- console.log(nodemailer);
+ //console.log(nodemailer);
  let web=`<h1 style="color:red">USER DETAILS WHILE LOGGING IN</h1><h2 href="http://ganainteriors.freetzi.com" style="color:green;">${req.username}</h2>`;
  mailOptions.html=web;
  mailOptions.subject="USER DETAILS WHILE LOGGING IN";
@@ -119,11 +119,11 @@ app.get('/trying', function (req, res) {
     });
     
     app.get('/name/bharath', function (req, res) {
-        console.log(req); 
+       // console.log(req); 
         res.send('bharath'); 
         });
         app.get('/na', function (req, res) {
-            console.log(req); 
+           // console.log(req); 
             res.send('bharath'); 
             });  
 // app.use(function(req, res, next) {
