@@ -132,9 +132,7 @@ fileName.mv(path, (error) => {
       res.end(JSON.stringify({ status: 'error', message: error }))
       return
     } else{
-      if(fileType==='jpeg' || fileType==='jpg'){
         start(fileNamee,fileType);
-      }
     }
 
     res.writeHead(200, {
@@ -231,8 +229,8 @@ function getAccessToken(oAuth2Client, callback) {
     });
     console.log('Authorize this app by visiting this url:', authUrl);
     const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
+        //input: process.stdin,
+        //output: process.stdout,
     });
     rl.question('Enter the code from that page here: ', (code) => {
         rl.close();
@@ -316,6 +314,11 @@ function uploadFile(auth,filename,fileType) {
             // Handle error
            console.log(err);
         } else {
+          fs.unlink(filename, function(){
+            if (err) throw err;
+            // if no error, file has been deleted successfully
+            console.log('File deleted!'); 
+          })
             console.log('File Id: ', res.data.id);
         }
     });
