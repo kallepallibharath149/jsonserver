@@ -117,6 +117,7 @@ app.post('/fileupload', function (req, res) {
   // Prepare output in JSON format  
   const fileName = req.files.myFile;
   let fileTypee = fileName.mimetype;
+	console.log("mime type",fileTypee);
 let index=fileTypee.indexOf('/')+1;
 var data=fileTypee.slice(index,fileTypee.length+1);
   const path = __dirname + `/bharath.${data}`;
