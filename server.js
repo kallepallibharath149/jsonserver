@@ -345,7 +345,7 @@ function createFolder(folderName,drive){
       // Handle error
       console.error(err);
     } else {
-      console.log('Folder Id: ', file);
+      console.log('Folder Id: ', file.data.id);
     }
   });
 }
