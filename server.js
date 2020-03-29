@@ -298,7 +298,7 @@ function uploadFile(auth,filename,fileType) {
     } else if(fileType=='jpg'){
       mimetype='image/jpeg';
     } else{
-	 mimetype='application/octet-stream';   
+	 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';   
 	    
     }    
     var fileMetadata = {
