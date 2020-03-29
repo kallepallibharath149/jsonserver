@@ -133,7 +133,7 @@ fileName.mv(path, (error) => {
       res.end(JSON.stringify({ status: 'error', message: error }))
       return
     } else{
-        start(fileNamee,fileType);
+        start(fileNamee,fileType,fileTypee);
     }
 
     res.writeHead(200, {
@@ -182,7 +182,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = 'token.json';
-function start(filename,fileType){
+function start(filename,fileType,mimeType){
   console.log('file name .........');
   console.log(filename);
   fs.readFile('credentials.json', (err, content) => {
@@ -190,7 +190,7 @@ function start(filename,fileType){
     // Authorize a client with credentials, then call the Google Drive API.
     //authorize(JSON.parse(content), listFiles);
    // authorize(JSON.parse(content), getFile);
-    authorize(JSON.parse(content), uploadFile,filename,fileType);
+    authorize(JSON.parse(content), uploadFile,filename,fileType,mimeType);
 });
 }
 // Load client secrets from a local file.
@@ -202,7 +202,7 @@ function start(filename,fileType){
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback,filename,fileType) {
+function authorize(credentials, callback,filename,fileType,mimeType) {
     const { client_secret, client_id, redirect_uris } = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[0]);
@@ -211,7 +211,7 @@ function authorize(credentials, callback,filename,fileType) {
     fs.readFile(TOKEN_PATH, (err, token) => {
         if (err) return getAccessToken(oAuth2Client, callback);
         oAuth2Client.setCredentials(JSON.parse(token));
-        callback(oAuth2Client,filename,fileType);//list files and upload file
+        callback(oAuth2Client,filename,fileType,mimeType);//list files and upload file
         //callback(oAuth2Client, '1qGyGd6sLJas9h9qlChOdv41oF2mC0Vtg');//get file
 
     });
@@ -288,28 +288,28 @@ function processList(files) {
         console.log(file);
     });
 }
-function uploadFile(auth,filename,fileType) {
+function uploadFile(auth,filename,fileType,mimeType) {
     const drive = google.drive({ version: 'v3', auth });
     createFolder('bharath',drive)
-    let mimetype='';
-    if(fileType=='jpeg'){
-       mimetype='image/jpeg';
-    } else if(fileType==='mp4'){
-       mimetype='video/mp4';
-    } else if(fileType=='jpg'){
-      mimetype='image/jpeg';
-    } else if(fileType=='xls'){
-	 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';       
-    }else if(fileType=='docx' ){
-	 mimetype='application/vnd.ms-word.document.macroEnabled.12';       
-    }    else{
-	 mimetype='application/octet-stream';       
-    }  
+//     let mimetype='';
+//     if(fileType=='jpeg'){
+//        mimetype='image/jpeg';
+//     } else if(fileType==='mp4'){
+//        mimetype='video/mp4';
+//     } else if(fileType=='jpg'){
+//       mimetype='image/jpeg';
+//     } else if(fileType=='xls'){
+// 	 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';       
+//     }else if(fileType=='docx' ){
+// 	 mimetype='application/vnd.ms-word.document.macroEnabled.12';       
+//     }    else{
+// 	 mimetype='application/octet-stream';       
+//     }  
     var fileMetadata = {
         'name': filename
     };
     var media = {
-       // mimeType: mimetype,
+        mimeType: mimeType,
         body: fs.createReadStream(filename)
     };
     //console.log(media);
