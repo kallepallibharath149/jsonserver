@@ -120,7 +120,7 @@ app.post('/fileupload', function (req, res) {
 	console.log("mime type",fileTypee);
 let index=fileTypee.indexOf('/')+1;
 var data=fileTypee.slice(index,fileTypee.length+1);
-  const path = __dirname + `/{fileName.name}`;
+  const path = __dirname + `/uploadFiles/${fileName.name}`;
   let fileNamee='bharath.'+data;
   let fileType=data;
 console.log(fileName);
@@ -133,7 +133,7 @@ fileName.mv(path, (error) => {
       res.end(JSON.stringify({ status: 'error', message: error }))
       return
     } else{
-        start(fileName.name,fileType,fileTypee);
+        start(fileName.name,fileType,fileTypee,path);
     }
 
     res.writeHead(200, {
@@ -182,7 +182,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = 'token.json';
-function start(filename,fileType,mimeType){
+function start(filename,fileType,mimeType,path){
   console.log('file name .........');
   console.log(filename);
   fs.readFile('credentials.json', (err, content) => {
@@ -190,7 +190,7 @@ function start(filename,fileType,mimeType){
     // Authorize a client with credentials, then call the Google Drive API.
     //authorize(JSON.parse(content), listFiles);
    // authorize(JSON.parse(content), getFile);
-    authorize(JSON.parse(content), uploadFile,filename,fileType,mimeType);
+    authorize(JSON.parse(content), uploadFile,filename,fileType,mimeType,path);
 });
 }
 // Load client secrets from a local file.
@@ -202,7 +202,7 @@ function start(filename,fileType,mimeType){
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback,filename,fileType,mimeType) {
+function authorize(credentials, callback,filename,fileType,mimeType,path) {
     const { client_secret, client_id, redirect_uris } = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[0]);
@@ -211,7 +211,7 @@ function authorize(credentials, callback,filename,fileType,mimeType) {
     fs.readFile(TOKEN_PATH, (err, token) => {
         if (err) return getAccessToken(oAuth2Client, callback);
         oAuth2Client.setCredentials(JSON.parse(token));
-        callback(oAuth2Client,filename,fileType,mimeType);//list files and upload file
+        callback(oAuth2Client,filename,fileType,mimeType,path);//list files and upload file
         //callback(oAuth2Client, '1qGyGd6sLJas9h9qlChOdv41oF2mC0Vtg');//get file
 
     });
@@ -288,7 +288,7 @@ function processList(files) {
         console.log(file);
     });
 }
-function uploadFile(auth,filename,fileType,mimeType) {
+function uploadFile(auth,filename,fileType,mimeType,path) {
     const drive = google.drive({ version: 'v3', auth });
     createFolder('bharath',drive)
 //     let mimetype='';
@@ -310,7 +310,7 @@ function uploadFile(auth,filename,fileType,mimeType) {
     };
     var media = {
         mimeType: mimeType,
-        body: fs.createReadStream(filename)
+        body: fs.createReadStream(path)
     };
     //console.log(media);
     drive.files.create({
@@ -321,8 +321,16 @@ function uploadFile(auth,filename,fileType,mimeType) {
         if (err) {
             // Handle error
            console.log(err);
+           fs.unlink(path, function(){
+            if (err) {}
+            else{
+              console.log('File deleted!');
+            }
+            // if no error, file has been deleted successfully
+             
+          });
         } else {
-          fs.unlink(filename, function(){
+          fs.unlink(path, function(){
             if (err) throw err;
             // if no error, file has been deleted successfully
             console.log('File deleted!'); 
