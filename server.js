@@ -308,7 +308,7 @@ function uploadFile(auth,filename,fileType) {
         'name': filename
     };
     var media = {
-        mimeType: mimetype,
+       // mimeType: mimetype,
         body: fs.createReadStream(filename)
     };
     //console.log(media);
