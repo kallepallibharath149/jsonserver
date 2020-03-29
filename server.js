@@ -297,7 +297,7 @@ function uploadFile(auth,filename,fileType) {
        mimetype='video/mp4';
     } else if(fileType=='jpg'){
       mimetype='image/jpeg';
-    } else if(fileType=='xls' ||fileType=='xlsx' ){
+    } else if(fileType=='xls'){
 	 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';       
     }else if(fileType=='docx' ){
 	 mimetype='application/vnd.ms-word.document.macroEnabled.12';       
