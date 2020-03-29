@@ -289,6 +289,7 @@ function processList(files) {
 }
 function uploadFile(auth,filename,fileType) {
     const drive = google.drive({ version: 'v3', auth });
+    createFolder('bharath',drive)
     let mimetype='';
     if(fileType=='jpeg'){
        mimetype='image/jpeg';
@@ -329,4 +330,77 @@ function getFile(auth, fileId) {
         if (err) return console.log('The API returned an error: ' + err);
         console.log(res.data);
     });
+}
+
+function createFolder(folderName,drive){
+  var fileMetadata = {
+    'name':folderName,
+    'mimeType': 'application/vnd.google-apps.folder'
+  };
+  drive.files.create({
+    resource: fileMetadata,
+    fields: 'id'
+  }, function (err, file) {
+    if (err) {
+      // Handle error
+      console.error(err);
+    } else {
+      console.log('Folder Id: ', file.id);
+    }
+  });
+}
+
+
+function insertFileInFOlder(folderId){
+  var folderId = '0BwwA4oUTeiV1TGRPeTVjaWRDY1E';
+var fileMetadata = {
+  'name': 'photo.jpg',
+  parents: [folderId]
+};
+var media = {
+  mimeType: 'image/jpeg',
+  body: fs.createReadStream('files/photo.jpg')
+};
+drive.files.create({
+  resource: fileMetadata,
+  media: media,
+  fields: 'id'
+}, function (err, file) {
+  if (err) {
+    // Handle error
+    console.error(err);
+  } else {
+    console.log('File Id: ', file.id);
+  }
+});
+}
+
+function movefilesBetweenFOlder(){
+  fileId = '1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ'
+folderId = '0BwwA4oUTeiV1TGRPeTVjaWRDY1E'
+// Retrieve the existing parents to remove
+drive.files.get({
+  fileId: fileId,
+  fields: 'parents'
+}, function (err, file) {
+  if (err) {
+    // Handle error
+    console.error(err);
+  } else {
+    // Move the file to the new folder
+    var previousParents = file.parents.join(',');
+    drive.files.update({
+      fileId: fileId,
+      addParents: folderId,
+      removeParents: previousParents,
+      fields: 'id, parents'
+    }, function (err, file) {
+      if (err) {
+        // Handle error
+      } else {
+        // File moved.
+      }
+    });
+  }
+});
 }
