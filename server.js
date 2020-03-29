@@ -297,10 +297,13 @@ function uploadFile(auth,filename,fileType) {
        mimetype='video/mp4';
     } else if(fileType=='jpg'){
       mimetype='image/jpeg';
-    } else{
-	 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';   
-	    
-    }    
+    } else if(fileType=='xls' ||fileType=='xlsx' ){
+	 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';       
+    }else if(fileType=='docx' ){
+	 mimetype='application/vnd.ms-word.document.macroEnabled.12';       
+    }    else{
+	 mimetype='application/octet-stream';       
+    }  
     var fileMetadata = {
         'name': filename
     };
