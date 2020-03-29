@@ -297,7 +297,10 @@ function uploadFile(auth,filename,fileType) {
        mimetype='video/mp4';
     } else if(fileType=='jpg'){
       mimetype='image/jpeg';
-    }
+    } else{
+	 mimetype='application/octet-stream';   
+	    
+    }    
     var fileMetadata = {
         'name': filename
     };
