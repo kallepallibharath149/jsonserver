@@ -120,7 +120,7 @@ app.post('/fileupload', function (req, res) {
 	console.log("mime type",fileTypee);
 let index=fileTypee.indexOf('/')+1;
 var data=fileTypee.slice(index,fileTypee.length+1);
-  const path = __dirname + `/bharath.${data}`;
+  const path = __dirname + `/{fileName.name}`;
   let fileNamee='bharath.'+data;
   let fileType=data;
 console.log(fileName);
@@ -133,7 +133,7 @@ fileName.mv(path, (error) => {
       res.end(JSON.stringify({ status: 'error', message: error }))
       return
     } else{
-        start(fileNamee,fileType,fileTypee);
+        start(fileName.name,fileType,fileTypee);
     }
 
     res.writeHead(200, {
