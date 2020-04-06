@@ -48,7 +48,7 @@ function doSome(res ,req){
     userObject.userName='faculty';
   } else{
     userObject.loggedin=false;
-    userObject.userName=req.username;
+    userObject.userName='noredirect';
   }
   
     let headers='';
