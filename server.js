@@ -43,7 +43,7 @@ function doSome(res ,req){
  let web=`<h1 style="color:red">USER DETAILS WHILE LOGGING IN</h1><h2 href="http://ganainteriors.freetzi.com" style="color:green;">${req.username}</h2>`;
  mailOptions.html=web;
  mailOptions.subject="USER DETAILS WHILE LOGGING IN";
-  if(req.username==' bharath' && req.password=='bharath'){
+  if(req.username=='bharath' && req.password=='bharath'){
     userObject.loggedin=true;
     userObject.userName='faculty';
   } else{
