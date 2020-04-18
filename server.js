@@ -306,7 +306,8 @@ function uploadFile(auth,filename,fileType,mimeType,path) {
 // 	 mimetype='application/octet-stream';       
 //     }  
     var fileMetadata = {
-        'name': filename
+        'name': filename,
+	 parents: ['184Zws5fHfMVYBAjUFfp_X1p4-TQ2e_G5']   
     };
     var media = {
         mimeType: mimeType,
