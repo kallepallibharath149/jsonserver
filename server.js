@@ -153,6 +153,16 @@ app.get('/trying', function (req, res) {
       });
    // res.send('redirecting to name'); 
     });
+app.get('/kitchenImages', function (req, res) { 
+let array=["https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
+"https://drive.google.com/uc?id=1R9fZIy10WdI2k7n7ef0CT8edPWgI7_zH&export=downloa",
+"https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
+"https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
+"https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
+"https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
+];
+    res.send(array); 
+    });
     
     app.get('/name/bharath', function (req, res) {
        // console.log(req); 
