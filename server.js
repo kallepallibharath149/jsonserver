@@ -140,7 +140,7 @@ fileName.mv(path, (error) => {
       res.end(JSON.stringify({ status: 'error', message: error }))
       return
     } else{
-        start(fileName.name,fileType,fileTypee,path,'fileUpload');
+        start(fileName.name,fileTypee,path,'fileUpload');
     }
 
     res.writeHead(200, {
