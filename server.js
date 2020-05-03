@@ -456,7 +456,8 @@ function uploadFile(auth,filename,mimeType,path) {
         mimeType: mimeType,
         body: fs.createReadStream(path)
     };
-    //console.log(media);
+    console.log('inside upload function');
+    console.log(media);
     drive.files.create({
         resource: fileMetadata,
         media: media,
