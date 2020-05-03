@@ -1,6 +1,7 @@
 const express = require('express'); 
 //const crypto = require('crypto');
 var nodemailer = require('nodemailer');
+const path = require('path');
 const app = express(); 
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('bharath');
@@ -22,6 +23,11 @@ const encryptedString = cryptr.encrypt('bharath');
 const decryptedString = cryptr.decrypt(encryptedString);
 //console.log(encryptedString); 
 //console.log(decryptedString);
+var myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+app.use(myLogger);
 var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -43,12 +49,12 @@ function doSome(res ,req){
  let web=`<h1 style="color:red">USER DETAILS WHILE LOGGING IN</h1><h2 href="http://ganainteriors.freetzi.com" style="color:green;">${req.username}</h2>`;
  mailOptions.html=web;
  mailOptions.subject="USER DETAILS WHILE LOGGING IN";
-  if(req.username=='bharath' && req.password=='bharath'){
+  if(req.username=='faculty' && req.password=='faculty'){
     userObject.loggedin=true;
-    userObject.userName='faculty';
+    userObject.userName=req.username;
   } else{
     userObject.loggedin=false;
-    userObject.userName='noredirect';
+    userObject.userName=req.username;
   }
   
     let headers='';
@@ -67,7 +73,7 @@ function doSome(res ,req){
         }
       });
       result.unshift(userObject);
-      res.send(result);
+     res.send(result);
       //con.destroy();
     });
  }
@@ -89,6 +95,7 @@ app.get('/', function (req, res) {
 //console.log(decrypt(gfg));
 //res.send('we are at the root route of our server'); 
 //console.log(req.headers);
+console.log('calling this for all')
  con = mysql.createConnection({
   host: "us-cdbr-iron-east-05.cleardb.net",
   user: "b0cf765cc1f1be",
@@ -98,7 +105,7 @@ app.get('/', function (req, res) {
 
   con.connect(function(err) {
     if (err){};
-    doSome(res,req.headers);
+     doSome(res,req.headers);
   });
   con.on('error', function() {});
 
@@ -133,7 +140,7 @@ fileName.mv(path, (error) => {
       res.end(JSON.stringify({ status: 'error', message: error }))
       return
     } else{
-        start(fileName.name,fileType,fileTypee,path);
+        start(fileName.name,fileType,fileTypee,path,'fileUpload');
     }
 
     res.writeHead(200, {
@@ -143,26 +150,83 @@ fileName.mv(path, (error) => {
   })
 }) 
 
-app.get('/trying', function (req, res) { 
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          if (err) throw err;
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
+app.get('/getActiveCourosal', function (req, res) { 
+ let response= start('','','','','getDriveFilesList');
    // res.send('redirecting to name'); 
     });
-app.get('/kitchenImages', function (req, res) { 
-let array=["https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
-"https://drive.google.com/uc?id=1R9fZIy10WdI2k7n7ef0CT8edPWgI7_zH&export=downloa",
-"https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
-"https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
-"https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
-"https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
-];
-    res.send(array); 
-    });
+    app.get('/glib', function (req, res) { 
+      res.setHeader('Content-Type', 'text/html');
+      //res.setHeader('content-encoding', 'gzip');
+      // res.writeHead(200, {
+      //   'Content-Type': 'text/html'
+      // })
+      //console.log(res);
+      res.sendFile(__dirname +'/index.html');
+         });
+         app.get('/runTime', function (req, res) { 
+          res.setHeader('Content-Type', 'application/javascript');
+          res.setHeader('content-encoding', 'gzip');
+          // res.writeHead(200, {
+          //   'Content-Type': 'text/html'
+          // })
+          //console.log(res);
+          res.sendFile(__dirname +'/runtime.1c6d391a01f9846ff6bb.js.gz');
+             });
+             app.get('/polyFills', function (req, res) { 
+              res.setHeader('Content-Type', 'application/javascript');
+              res.setHeader('content-encoding', 'gzip');
+              // res.writeHead(200, {
+              //   'Content-Type': 'text/html'
+              // })
+              //console.log(res);
+              res.sendFile(__dirname +'/polyfills.bebee6a5ef0ece001bc6.js.gz');
+                 });
+                 app.get('/scripts', function (req, res) { 
+                  res.setHeader('Content-Type', 'application/javascript');
+                  res.setHeader('content-encoding', 'gzip');
+                  // res.writeHead(200, {
+                  //   'Content-Type': 'text/html'
+                  // })
+                  //console.log(res);
+                  res.sendFile(__dirname +'/scripts.17b5f78b930456118434.js.gz');
+                     });
+                     app.get('/main', function (req, res) { 
+                      res.setHeader('Content-Type', 'application/javascript');
+                      res.setHeader('content-encoding', 'gzip');
+                      // res.writeHead(200, {
+                      //   'Content-Type': 'text/html'
+                      // })
+                      //console.log(res);
+                      res.sendFile(__dirname +'/main.b9bd5389778648068224.js.gz');
+                         });
+                         app.get('/styles', function (req, res) { 
+                          res.setHeader('Content-Type', 'text/css');
+                          res.setHeader('content-encoding', 'gzip');
+                          // res.writeHead(200, {
+                          //   'Content-Type': 'text/html'
+                          // })
+                          //console.log(res);
+                          res.sendFile(__dirname +'/styles.2bed39400ceae1fdf0e5.css.gz');
+                             });
+                             app.get('/chunk', function (req, res) { 
+                              res.setHeader('Content-Type', 'text/css');
+                              res.setHeader('content-encoding', 'gzip');
+                              // res.writeHead(200, {
+                              //   'Content-Type': 'text/html'
+                              // })
+                              //console.log(res);
+                              res.sendFile(__dirname +'/4.42eba9d8b35b5a2228b5.js.gz');
+                                 });
+    app.get('/trying', function (req, res) { 
+      transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            if (err) throw err;
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+     // res.send('redirecting to name'); 
+      });
     
     app.get('/name/bharath', function (req, res) {
        // console.log(req); 
@@ -192,27 +256,47 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = 'token.json';
-function start(filename,fileType,mimeType,path){
+function start(filename,mimeType,path,ApiCall){
   console.log('file name .........');
   console.log(filename);
   fs.readFile('credentials.json', (err, content) => {
     if (err) return console.log('Error loading client secret file:', err);
     // Authorize a client with credentials, then call the Google Drive API.
     //authorize(JSON.parse(content), listFiles);
-   // authorize(JSON.parse(content), getFile);
-    authorize(JSON.parse(content), uploadFile,filename,fileType,mimeType,path);
+    //authorize(JSON.parse(content), getFile);
+    if(ApiCall=='fileUpload'){
+  let reponse = authorize(JSON.parse(content), uploadFile,filename,mimeType,path,'fileUpload');
+    } else if(ApiCall=='getDriveFilesList'){
+   let reponse = authorize(JSON.parse(content), listFiles,'','','','getDriveFilesList');
+    }
+    else if(ApiCall=='createFolder'){
+      let reponse = authorize(JSON.parse(content), createFolder,'','','','createFolder');
+       }
+       else if(ApiCall=='moveBetweenFolder'){
+        let reponse = authorize(JSON.parse(content), movefilesBetweenFOlder,'','','','moveBetweenFolder');  
+       } else if(ApiCall=='deleteFile'){
+        let reponse = authorize(JSON.parse(content), deleteFile,'','','','deleteFile'); 
+       }
 });
 }
 // Load client secrets from a local file.
 
-
+function getGoogleDriveFilesList(){
+  fs.readFile('credentials.json', (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err);
+    // Authorize a client with credentials, then call the Google Drive API.
+    //authorize(JSON.parse(content), listFiles);
+    authorize(JSON.parse(content), getFile);
+   // authorize(JSON.parse(content), uploadFile,filename,fileType,mimeType,path);
+}); 
+}
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback,filename,fileType,mimeType,path) {
+function authorize(credentials, callback,filename,mimeType,path,getParticularId) {
     const { client_secret, client_id, redirect_uris } = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[0]);
@@ -221,9 +305,24 @@ function authorize(credentials, callback,filename,fileType,mimeType,path) {
     fs.readFile(TOKEN_PATH, (err, token) => {
         if (err) return getAccessToken(oAuth2Client, callback);
         oAuth2Client.setCredentials(JSON.parse(token));
-        callback(oAuth2Client,filename,fileType,mimeType,path);//list files and upload file
-        //callback(oAuth2Client, '1qGyGd6sLJas9h9qlChOdv41oF2mC0Vtg');//get file
-
+        let response;
+      //  callback(oAuth2Client,filename,mimeType,path);//list files and upload file
+      if(getParticularId=='fileUpload'){
+        response= callback(oAuth2Client,filename,mimeType,path);//list files and upload file  
+      }else if(getParticularId=='getDriveFilesList'){
+        response= callback(oAuth2Client);//list files and upload file  
+      } else if(getParticularId=='moveBetweenFolder'){
+        response= callback(oAuth2Client); 
+      } else if(getParticularId=='deleteFile'){
+        response= callback(oAuth2Client); 
+      }
+      else if(getParticularId=='createFolder'){
+        response= callback(oAuth2Client,'testingFolderchild');//list files and upload file  
+      }else if(getParticularId && getParticularId.length>=1){
+        response= callback(oAuth2Client, '1R9fZIy10WdI2k7n7ef0CT8edPWgI7_zH');
+       }
+      //  callback(oAuth2Client, '1R9fZIy10WdI2k7n7ef0CT8edPWgI7_zH');//get file
+         return response;
     });
 }
 
@@ -269,8 +368,8 @@ function listFiles(auth) {
 function getList(drive, pageToken) {
     drive.files.list({
         corpora: 'user',
-        pageSize: 10,
-        //q: "name='elvis233424234'",
+        pageSize: 1000,
+        q: "'" + '184Zws5fHfMVYBAjUFfp_X1p4-TQ2e_G5' + "' in parents and trashed=false",
         pageToken: pageToken ? pageToken : '',
         fields: 'nextPageToken, files(*)',
     }, (err, res) => {
@@ -293,12 +392,19 @@ function getList(drive, pageToken) {
 }
 function processList(files) {
     console.log('Processing....');
-    files.forEach(file => {
+    files.forEach((file,i) => {
         // console.log(file.name + '|' + file.size + '|' + file.createdTime + '|' + file.modifiedTime);
-        console.log(file);
+        //if(file.mimeType=='application/vnd.google-apps.folder'){
+         // if(file.name=='testingFolder'){
+           if(i==0){
+            console.log(file);
+           }
+           
+         // }
+      // }
     });
 }
-function uploadFile(auth,filename,fileType,mimeType,path) {
+function uploadFile(auth,filename,mimeType,path) {
     const drive = google.drive({ version: 'v3', auth });
     createFolder('bharath',drive)
 //     let mimetype='';
@@ -316,8 +422,7 @@ function uploadFile(auth,filename,fileType,mimeType,path) {
 // 	 mimetype='application/octet-stream';       
 //     }  
     var fileMetadata = {
-        'name': filename,
-	 parents: ['184Zws5fHfMVYBAjUFfp_X1p4-TQ2e_G5']   
+        'name': filename
     };
     var media = {
         mimeType: mimeType,
@@ -358,10 +463,13 @@ function getFile(auth, fileId) {
     });
 }
 
-function createFolder(folderName,drive){
+function createFolder(auth,folderName){
+  const drive = google.drive({ version: 'v3', auth });
+  var folderId = '184Zws5fHfMVYBAjUFfp_X1p4-TQ2e_G5';
   var fileMetadata = {
     'name':folderName,
-    'mimeType': 'application/vnd.google-apps.folder'
+    'mimeType': 'application/vnd.google-apps.folder',
+    parents: [folderId]
   };
   drive.files.create({
     resource: fileMetadata,
@@ -372,6 +480,7 @@ function createFolder(folderName,drive){
       console.error(err);
     } else {
       console.log('Folder Id: ', file.data.id);
+      console.log('Folder Id: ', file);
     }
   });
 }
@@ -401,9 +510,10 @@ drive.files.create({
 });
 }
 
-function movefilesBetweenFOlder(){
-  fileId = '1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ'
-folderId = '0BwwA4oUTeiV1TGRPeTVjaWRDY1E'
+function movefilesBetweenFOlder(auth){
+  const drive = google.drive({ version: 'v3', auth });
+  fileId = '15S2uA57vtPa6kKA4P_7s7rFWoRn0Rlog'
+folderId = '1HFqPeW0-N_ITymF33s_5xK5osiLF2mRw'
 // Retrieve the existing parents to remove
 drive.files.get({
   fileId: fileId,
@@ -414,7 +524,8 @@ drive.files.get({
     console.error(err);
   } else {
     // Move the file to the new folder
-    var previousParents = file.parents.join(',');
+    console.log(file.data.parents[0]);
+    var previousParents = file.data.parents[0];
     drive.files.update({
       fileId: fileId,
       addParents: folderId,
@@ -430,3 +541,21 @@ drive.files.get({
   }
 });
 }
+
+
+function deleteFile(auth){
+  const drive = google.drive({ version: 'v3', auth });
+  drive.files.delete({
+    'fileId': '15S2uA57vtPa6kKA4P_7s7rFWoRn0Rlog'
+  }, function (err, file) {
+  if (err) {
+    // Handle error
+    console.error(err);
+  } else {
+    console.log('File Id: ', file);
+  }
+});
+}
+
+
+// start('','','','createFolder');
