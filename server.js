@@ -227,6 +227,24 @@ app.get('/getActiveCourosal', function (req, res) {
                               //console.log(res);
                               res.sendFile(__dirname +'/4.42eba9d8b35b5a2228b5.js.gz');
                                  });
+                                 app.get('/slick.d41f55a78e6f49a55128.ttf', function (req, res) { 
+                                  res.setHeader('Content-Type', 'text/html');
+                                  res.setHeader('content-encoding', 'gzip');
+                                  // res.writeHead(200, {
+                                  //   'Content-Type': 'text/html'
+                                  // })
+                                  //console.log(res);
+                                  res.sendFile(__dirname +'/slick.d41f55a78e6f49a55128.ttf.gz');
+                                     });
+                                     app.get('/slick.b7c9e1e479de3b53f1e4.woff', function (req, res) { 
+                                      res.setHeader('Content-Type', 'text/html');
+                                      res.setHeader('content-encoding', 'gzip');
+                                      // res.writeHead(200, {
+                                      //   'Content-Type': 'text/html'
+                                      // })
+                                      //console.log(res);
+                                      res.sendFile(__dirname +'/slick.b7c9e1e479de3b53f1e4.woff.gz');
+                                         });
     app.get('/trying', function (req, res) { 
       transporter.sendMail(mailOptions, function(error, info){
           if (error) {
