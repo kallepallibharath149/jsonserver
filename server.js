@@ -85,10 +85,15 @@ app.listen(port, function (err) {
     if (err) throw err;
 	} 
 	else{ 
-		console.log("server has been started at "+port); 
+    console.log("server has been started at "+port);
+    stayOn(); 
 	} 
 }) 
-
+function stayOn(){
+  setInterval(()=>{
+    console.log('server is in on mode');
+  },10000);
+}
 app.get('/', function (req, res) { 
      //var gfg = encrypt('bharath');
 //console.log(gfg);
