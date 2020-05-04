@@ -92,7 +92,7 @@ app.listen(port, function (err) {
 function stayOn(){
   setInterval(()=>{
     console.log('server is in on mode');
-  },10000);
+  },15000);
 }
 app.get('/', function (req, res) { 
      //var gfg = encrypt('bharath');
