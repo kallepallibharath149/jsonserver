@@ -1,5 +1,6 @@
 const express = require('express'); 
 //const crypto = require('crypto');
+var http = require('http'); //importing http
 var nodemailer = require('nodemailer');
 const path = require('path');
 const app = express(); 
@@ -27,6 +28,28 @@ var myLogger = function (req, res, next) {
   console.log('LOGGED')
   next()
 }
+function startKeepAlive() {
+  setInterval(function() {
+      var options = {
+          host: 'https://serveee.herokuapp.com',
+          port: 80,
+          path: '/'
+      };
+      http.get(options, function(res) {
+          res.on('data', function(chunk) {
+              try {
+                  // optional logging... disable after it's working
+                  console.log("HEROKU RESPONSE: " + chunk);
+              } catch (err) {
+                  console.log(err.message);
+              }
+          });
+      }).on('error', function(err) {
+          console.log("Error: " + err.message);
+      });
+  }, 20 * 60 * 1000); // load every 20 minutes
+}
+startKeepAlive();
 app.use(myLogger);
 var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
