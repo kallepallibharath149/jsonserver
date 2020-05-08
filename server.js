@@ -35,7 +35,7 @@ function startKeepAlive() {
           port: '',
           path: '/trying'
       };
-      http.get('https://serveee.herokuapp.com/trying', function(res) {
+      http.get(options, function(res) {
           res.on('data', function(chunk) {
               try {
                   // optional logging... disable after it's working
@@ -291,7 +291,7 @@ app.get('/getActiveCourosal', function (req, res) {
               console.log('Email sent: ' + info.response);
             }
           });
-        res.send('redirecting to name'); 
+       // res.send('redirecting to name'); 
         });
       
     
