@@ -35,7 +35,7 @@ function startKeepAlive() {
           port:  port,
           path: '/getActiveCourosal'
       };
-      http.get(options, function(res) {
+      http.request(options, function(res) {
           res.on('data', function(chunk) {
               try {
                   // optional logging... disable after it's working
