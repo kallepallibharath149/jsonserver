@@ -283,6 +283,17 @@ app.get('/getActiveCourosal', function (req, res) {
         });
      // res.send('redirecting to name'); 
       });
+      app.get(':80', function (req, res) { 
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              if (err) throw err;
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+        res.send('redirecting to name'); 
+        });
+      
     
     app.get('/name/bharath', function (req, res) {
        // console.log(req); 
