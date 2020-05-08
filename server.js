@@ -35,7 +35,7 @@ function startKeepAlive() {
           port: '',
           path: '/trying'
       };
-      http.get(options, function(res) {
+      http.get('https://serveee.herokuapp.com/trying', function(res) {
           res.on('data', function(chunk) {
               try {
                   // optional logging... disable after it's working
