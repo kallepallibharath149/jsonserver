@@ -32,7 +32,7 @@ function startKeepAlive() {
   setInterval(function() {
       var options = {
           host: 'https://serveee.herokuapp.com',
-          path: '/'
+          path: '/trying'
       };
       http.get(options, function(res) {
           res.on('data', function(chunk) {
