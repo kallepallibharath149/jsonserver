@@ -33,7 +33,8 @@ function startKeepAlive() {
       var options = {
           host: 'https://serveee.herokuapp.com',
           port:  port,
-          path: '/getActiveCourosal'
+          path: '/getActiveCourosal',
+          method : 'GET'
       };
       http.request(options, function(res) {
           res.on('data', function(chunk) {
