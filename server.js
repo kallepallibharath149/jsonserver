@@ -32,7 +32,7 @@ function startKeepAlive() {
   setInterval(function() {
       var options = {
           host: 'https://serveee.herokuapp.com',
-          port: '',
+          port:  port,
           path: '/trying'
       };
       http.get(options, function(res) {
