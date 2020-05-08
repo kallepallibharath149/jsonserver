@@ -33,7 +33,7 @@ function startKeepAlive() {
       var options = {
           host: 'https://serveee.herokuapp.com',
           port:  port,
-          path: '/trying'
+          path: '/'
       };
       http.get(options, function(res) {
           res.on('data', function(chunk) {
@@ -47,7 +47,7 @@ function startKeepAlive() {
       }).on('error', function(err) {
           console.log("Error: " + err.message);
       });
-  }, 1 * 1 * 1000); // load every 20 minutes
+  }, 2 * 60 * 1000); // load every 20 minutes
 }
 startKeepAlive();
 app.use(myLogger);
