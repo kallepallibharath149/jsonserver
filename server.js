@@ -80,22 +80,23 @@ function doSome(res ,req){
     userObject.loggedin=false;
     userObject.userName=req.username;
   }
-  
-    let headers='';
-    con.query("SELECT * FROM Persons", function (err, result, fields) {
-      if (err) throw err;
-      let keys=Object.keys(result[0]);
-      keys.forEach(header=>{
-        headers=headers+' '+header;
-      })
-      headers=headers+" "+"this was developped by bharath";
-      transporter.sendMail(mailOptions, function(error, info){
+        transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
         } else {
           console.log('Email sent: ' + info.response);
         }
       });
+//     let headers='';
+	
+//     con.query("SELECT * FROM Persons", function (err, result, fields) {
+//       if (err) throw err;
+//       let keys=Object.keys(result[0]);
+//       keys.forEach(header=>{
+//         headers=headers+' '+header;
+//       })
+//       headers=headers+" "+"this was developped by bharath";
+
      // result.unshift(userObject);
      //res.send(result);
       //con.destroy();
