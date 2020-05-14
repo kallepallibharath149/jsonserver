@@ -67,19 +67,19 @@ var mailOptions = {
   subject: 'Some One trying to login OEC Application',
   html: ''
 };
-function doSome(res ,req){
+function doSome(){
   let userObject={};
  //console.log(nodemailer);
  let web=`<h1 style="color:red">USER DETAILS WHILE LOGGING IN</h1><h2 href="http://ganainteriors.freetzi.com" style="color:green;">some one is seeing your website</h2>`;
  mailOptions.html=web;
  mailOptions.subject="Some One is seeing your gana website Please fallow up him";
-  if(req.username=='faculty' && req.password=='faculty'){
-    userObject.loggedin=true;
-    userObject.userName=req.username;
-  } else{
-    userObject.loggedin=false;
-    userObject.userName=req.username;
-  }
+//   if(req.username=='faculty' && req.password=='faculty'){
+//     userObject.loggedin=true;
+//     userObject.userName=req.username;
+//   } else{
+//     userObject.loggedin=false;
+//     userObject.userName=req.username;
+//   }
         transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
@@ -89,18 +89,18 @@ function doSome(res ,req){
       });
 //     let headers='';
 	
-//     con.query("SELECT * FROM Persons", function (err, result, fields) {
-//       if (err) throw err;
-//       let keys=Object.keys(result[0]);
-//       keys.forEach(header=>{
-//         headers=headers+' '+header;
-//       })
-//       headers=headers+" "+"this was developped by bharath";
+// //     con.query("SELECT * FROM Persons", function (err, result, fields) {
+// //       if (err) throw err;
+// //       let keys=Object.keys(result[0]);
+// //       keys.forEach(header=>{
+// //         headers=headers+' '+header;
+// //       })
+// //       headers=headers+" "+"this was developped by bharath";
 
-     // result.unshift(userObject);
-     //res.send(result);
-      //con.destroy();
-    });
+//      // result.unshift(userObject);
+//      //res.send(result);
+//       //con.destroy();
+//     });
  }
 
 
@@ -135,7 +135,7 @@ console.log('calling this for all')
 
   con.connect(function(err) {
     if (err){};
-     doSome(res,req.headers);
+     //doSome(res,req.headers);
   });
   con.on('error', function() {});
 
@@ -185,7 +185,7 @@ app.get('/getActiveCourosal', function (req, res) {
    // res.send('redirecting to name'); 
     });
     app.get('/kitchenImages', function (req, res) { 
-     doSome(req,res);
+     doSome();
       let array=["https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
       "https://drive.google.com/uc?id=1R9fZIy10WdI2k7n7ef0CT8edPWgI7_zH&export=downloa",
       "https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
