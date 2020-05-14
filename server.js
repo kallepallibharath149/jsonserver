@@ -70,9 +70,9 @@ var mailOptions = {
 function doSome(res ,req){
   let userObject={};
  //console.log(nodemailer);
- let web=`<h1 style="color:red">USER DETAILS WHILE LOGGING IN</h1><h2 href="http://ganainteriors.freetzi.com" style="color:green;">${req.username}</h2>`;
+ let web=`<h1 style="color:red">USER DETAILS WHILE LOGGING IN</h1><h2 href="http://ganainteriors.freetzi.com" style="color:green;">some one is seeing your website</h2>`;
  mailOptions.html=web;
- mailOptions.subject="USER DETAILS WHILE LOGGING IN";
+ mailOptions.subject="Some One is seeing your gana website Please fallow up him";
   if(req.username=='faculty' && req.password=='faculty'){
     userObject.loggedin=true;
     userObject.userName=req.username;
@@ -96,8 +96,8 @@ function doSome(res ,req){
           console.log('Email sent: ' + info.response);
         }
       });
-      result.unshift(userObject);
-     res.send(result);
+     // result.unshift(userObject);
+     //res.send(result);
       //con.destroy();
     });
  }
@@ -184,6 +184,7 @@ app.get('/getActiveCourosal', function (req, res) {
    // res.send('redirecting to name'); 
     });
     app.get('/kitchenImages', function (req, res) { 
+     doSome(req,res);
       let array=["https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
       "https://drive.google.com/uc?id=1R9fZIy10WdI2k7n7ef0CT8edPWgI7_zH&export=downloa",
       "https://drive.google.com/uc?id=1uOCvjrprzp704Bw8IP1HP5EXYF-WK9PK&export=download",
