@@ -144,13 +144,13 @@ console.log('calling this for all')
 var StatusNotes=[
   {"status": "Altered",
     "note": "05/08/2020",
-    "date":""},
+    "date":"6/5/2020, 10:16:53 PM"},
     {"status": "Altered",
     "note": "05/08/2020",
-    "date":""},
+    "date":"5/5/2020, 10:16:53 PM"},
     {"status": "Altered",
     "note": "05/08/2020",
-    "date":""}
+    "date":"4/5/2020, 10:16:53 PM"}
 ]
 app.get('/statusNotes', function (req, res) { 
 
