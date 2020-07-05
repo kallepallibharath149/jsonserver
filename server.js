@@ -408,7 +408,7 @@ var tableData = [
             res.send(obj); 
             });
        app.post('/addStatusNotes', function (req, res) { 
-
+        console.log(req);
         let obj={
           "statusCode": 200,
            "resPayLoad":null,
