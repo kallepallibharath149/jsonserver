@@ -410,8 +410,10 @@ var tableData = [
         }
             res.send(obj); 
             });
-       app.post('/addStatusNotes', function (req, res) { 
+       app.post('/addStatusNotes', function (req, res) {
+        StatusNotes.splice(0,0,req.body) ;
         console.log(req.body);
+        console.log('values',StatusNotes);
         let obj={
           "statusCode": 200,
            "resPayLoad":null,
