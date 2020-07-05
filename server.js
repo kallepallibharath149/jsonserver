@@ -157,6 +157,15 @@ app.get('/statusNotes', function (req, res) {
    }
        res.send(obj); 
        });
+       app.post('/addStatusNotes', function (req, res) { 
+
+        let obj={
+          "statusCode": 200,
+           "resPayLoad":null,
+            "message": "Status Notes Updated SuccessFully"
+        }
+            res.send(obj); 
+            });
 
 app.post('/', function (req, res) {  
    // Prepare output in JSON format  
