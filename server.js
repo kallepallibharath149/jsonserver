@@ -141,6 +141,23 @@ console.log('calling this for all')
 
 
 }) ;
+var StatusNotes=[
+  {"status": "Altered",
+    "note": "26/08/2020"},
+    {"status": "Altered",
+    "note": "26/08/2020"},
+    {"status": "Altered",
+    "note": "26/08/2020"}
+]
+app.get('/statusNotes', function (req, res) { 
+
+   let obj={
+     "statusCode": 200,
+      "resPayLoad":StatusNotes
+   }
+       res.send(obj); 
+       });
+
 app.post('/', function (req, res) {  
    // Prepare output in JSON format  
    response = {  
