@@ -143,11 +143,14 @@ console.log('calling this for all')
 }) ;
 var StatusNotes=[
   {"status": "Altered",
-    "note": "26/08/2020"},
+    "note": "05/08/2020",
+    "date":""},
     {"status": "Altered",
-    "note": "26/08/2020"},
+    "note": "05/08/2020",
+    "date":""},
     {"status": "Altered",
-    "note": "26/08/2020"}
+    "note": "05/08/2020",
+    "date":""}
 ]
 app.get('/statusNotes', function (req, res) { 
 
